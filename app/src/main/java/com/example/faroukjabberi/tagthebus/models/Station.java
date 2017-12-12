@@ -1,10 +1,15 @@
 package com.example.faroukjabberi.tagthebus.models;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import com.google.gson.annotations.SerializedName;
+
 /**
  * Created by farouk.jabberi on 08/12/2017.
  */
 
-public class Station {
+public class Station implements Parcelable {
 
     /**
      * id : 1
@@ -18,16 +23,25 @@ public class Station {
      * buses : 06 - 40 - 42 - 141 - B25 - N11
      * distance : 0
      */
-
+    @SerializedName("id")
     private String id;
+    @SerializedName("street_name")
     private String street_name;
+    @SerializedName("city")
     private String city;
+    @SerializedName("utm_x")
     private String utm_x;
+    @SerializedName("utm_y")
     private String utm_y;
+    @SerializedName("lat")
     private String lat;
+    @SerializedName("lon")
     private String lon;
+    @SerializedName("furniture")
     private String furniture;
+    @SerializedName("buses")
     private String buses;
+    @SerializedName("distance")
     private String distance;
 
     public String getId() {
@@ -109,4 +123,52 @@ public class Station {
     public void setDistance(String distance) {
         this.distance = distance;
     }
+
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.id);
+        dest.writeString(this.street_name);
+        dest.writeString(this.city);
+        dest.writeString(this.utm_x);
+        dest.writeString(this.utm_y);
+        dest.writeString(this.lat);
+        dest.writeString(this.lon);
+        dest.writeString(this.furniture);
+        dest.writeString(this.buses);
+        dest.writeString(this.distance);
+    }
+
+    public Station() {
+    }
+
+    protected Station(Parcel in) {
+        this.id = in.readString();
+        this.street_name = in.readString();
+        this.city = in.readString();
+        this.utm_x = in.readString();
+        this.utm_y = in.readString();
+        this.lat = in.readString();
+        this.lon = in.readString();
+        this.furniture = in.readString();
+        this.buses = in.readString();
+        this.distance = in.readString();
+    }
+
+    public static final Parcelable.Creator<Station> CREATOR = new Parcelable.Creator<Station>() {
+        @Override
+        public Station createFromParcel(Parcel source) {
+            return new Station(source);
+        }
+
+        @Override
+        public Station[] newArray(int size) {
+            return new Station[size];
+        }
+    };
 }
