@@ -9,4 +9,7 @@
     <string name="add_title">Add Title</string>
     <string name="picture_preview">Picture Preview</string>
     <string name="nothing" />
+    <string name="twitter">Twitter</string>
+    <string name="facebook">Facebook</string>
+    <string name="mail">Mail</string>
 </resources>

@@ -134,9 +134,6 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, Google
             mMap.addMarker(new MarkerOptions()
                     .title(getString(R.string.your_location))
                     .position(myLocation));
-            Toast.makeText(getActivity(), String.valueOf(locationEvent.getLatitude()) + " ," + String.valueOf(locationEvent.getLongitude()), Toast.LENGTH_SHORT).show();
-
-
         } else {
             LatLng firstStation = new LatLng(Double.valueOf(nearStations.getData().getNearstations().get(0).getLat()), Double.valueOf(nearStations.getData().getNearstations().get(0).getLon()));
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(firstStation, 16));

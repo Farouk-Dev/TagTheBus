@@ -24,7 +24,7 @@ public class PictureDetailsActivity extends AppCompatActivity {
     @OnClick({R.id.back_image,R.id.back_text})
     void goBack() {
         // go back
-        Utils.navigate(this,StationPicturesActivity.class,null,null);
+        Utils.navigate(this,StationPicturesActivity.class,station,stationPicture);
     }
 
 

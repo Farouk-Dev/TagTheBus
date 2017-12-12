@@ -1,8 +1,10 @@
 package com.example.faroukjabberi.tagthebus.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -15,7 +17,7 @@ import com.example.faroukjabberi.tagthebus.fragments.MapsFragment;
 import com.example.faroukjabberi.tagthebus.models.NearStations;
 import com.example.faroukjabberi.tagthebus.network.WsCall;
 import com.example.faroukjabberi.tagthebus.network.WsCallInterface;
-import com.example.faroukjabberi.tagthebus.utils.GPS;
+import com.example.faroukjabberi.tagthebus.utils.GPSTracker;
 import com.example.faroukjabberi.tagthebus.utils.Utils;
 
 import org.greenrobot.eventbus.EventBus;
@@ -88,12 +90,14 @@ public class StationsActivity extends AppCompatActivity implements WsCallInterfa
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
         if(isChecked) {
-            GPS gps = new GPS(this);
-            if (gps.canGetLocation()) {
+            // start gps tracker service
+            startService(new Intent(this, GPSTracker.class));
+            GPSTracker gps = new GPSTracker(this);
+            if (gps.isLocationEnabled()) {
                 // send event location
                 EventBus.getDefault().post(new LocationEvent(isChecked,gps.getLatitude(),gps.getLongitude()));
             } else {
-                gps.showSettingsAlert();
+                gps.askToOnLocation();
                 locationCheckbox.toggle();
             }
 
