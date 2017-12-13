@@ -199,7 +199,9 @@ public class Utils {
    public  static  String  getDate(Date date) {
        // Display a date in day, month, year format
        DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+       DateFormat dateFormat = new SimpleDateFormat("hh:mm a");
        String today = formatter.format(date);
+       today= today+ " "+dateFormat.format(date);
        return today;
    }
 }
