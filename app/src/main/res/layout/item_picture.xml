@@ -19,6 +19,7 @@
         android:layout_toEndOf="@+id/picture"
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
+       android:layout_toStartOf="@+id/arrow"
         tools:text="picture title"
         tools:ignore="RelativeOverlap" />
 
@@ -30,6 +31,7 @@
         android:layout_toEndOf="@+id/picture"
         android:layout_marginStart="80dp"
         android:layout_marginBottom="10dp"
+        android:layout_toStartOf="@+id/arrow"
         tools:text="11/12/2017 00:00pm"
         tools:ignore="RelativeOverlap" />
 

@@ -17,6 +17,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.example.faroukjabberi.tagthebus.R;
 import com.example.faroukjabberi.tagthebus.events.PictureValidationEvent;
@@ -120,7 +121,7 @@ public class Utils {
     }
 
 
-    public static void previewCapturedImage(Activity activity, final Realm realm, final int StationId) {
+    public static void previewCapturedImage(final Activity activity, final Realm realm, final int StationId) {
         final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(activity);
         //inflate the view
         LayoutInflater inflater = activity.getLayoutInflater();
@@ -146,18 +147,22 @@ public class Utils {
         validate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // save  picture in data base
-                Uri pictureUri = Uri.fromFile(new File(fileUri.getPath()));
-                Log.e("fileUriRealm", fileUri.getPath());
-                // save picture and details in realm data base
-
-                Date currentTime = Calendar.getInstance().getTime();
-                addStationPicture(realm, StationId,getDate(currentTime),String.valueOf(pictureUri) , title.getText().toString());
-                // send  event  to StationPictureActivity in the purpose to refresh the  pictures list
-                EventBus.getDefault().postSticky(new PictureValidationEvent(true));
-                Log.e("realmobject", realm.where(StationPicture.class).findAll().toString());
-                // hide  the alert dialog
-                b.dismiss();
+                if(!title.getText().toString().equals(activity.getString(R.string.nothing))) {
+                    // save  picture in data base
+                    Uri pictureUri = Uri.fromFile(new File(fileUri.getPath()));
+                    Log.e("fileUriRealm", fileUri.getPath());
+                    // save picture and details in realm data base************
+                    Date currentTime = Calendar.getInstance().getTime();
+                    addStationPicture(realm, StationId, getDate(currentTime), String.valueOf(pictureUri), title.getText().toString());
+                    //***************************************************************
+                    // send  event  to StationPictureActivity in the purpose to refresh the  pictures list
+                    EventBus.getDefault().postSticky(new PictureValidationEvent(true));
+                    Log.e("realmobject", realm.where(StationPicture.class).findAll().toString());
+                    // hide  the alert dialog
+                    b.dismiss();
+                }else{
+                    Toast.makeText(activity,"Add title please",Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
