@@ -9,10 +9,12 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.faroukjabberi.tagthebus.R;
+import com.example.faroukjabberi.tagthebus.activities.StationPicturesActivity;
 import com.example.faroukjabberi.tagthebus.events.LocationEvent;
 import com.example.faroukjabberi.tagthebus.models.NearStations;
 import com.example.faroukjabberi.tagthebus.models.Station;
 import com.example.faroukjabberi.tagthebus.utils.Constants;
+import com.example.faroukjabberi.tagthebus.utils.Utils;
 import com.example.faroukjabberi.tagthebus.views.adapters.CustomInfoWindowAdapter;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -118,8 +120,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, Google
     public void onInfoWindowClick(Marker marker) {
         if (!marker.getTitle().equals(getString(R.string.your_location))) {
             Station station = (Station) marker.getTag();
-            Toast.makeText(getActivity(), station.getStreet_name() + " clicked  " + marker.getTitle(),
-                    Toast.LENGTH_SHORT).show();
+            Utils.navigate(getActivity(), StationPicturesActivity.class,station,null);
         }
     }
 

@@ -26,7 +26,10 @@ import com.example.faroukjabberi.tagthebus.models.StationPicture;
 import org.greenrobot.eventbus.EventBus;
 
 import java.io.File;
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
@@ -50,12 +53,12 @@ public class Utils {
         ft.commit();
     }
 
-    public static void navigate(Context context, Class<?> destination, Station station,StationPicture stationPicture) {
+    public static void navigate(Context context, Class<?> destination, Station station, StationPicture stationPicture) {
         Intent intent = new Intent(context, destination);
         if (station != null) {
             intent.putExtra(Constants.STATION, station);
         }
-        if(stationPicture!=null){
+        if (stationPicture != null) {
             intent.putExtra(Constants.STATION_PICTURE, stationPicture);
         }
         context.startActivity(intent);
@@ -147,7 +150,9 @@ public class Utils {
                 Uri pictureUri = Uri.fromFile(new File(fileUri.getPath()));
                 Log.e("fileUriRealm", fileUri.getPath());
                 // save picture and details in realm data base
-                addStationPicture(realm, StationId, "dateeeeeee here ", String.valueOf(pictureUri), title.getText().toString());
+
+                Date currentTime = Calendar.getInstance().getTime();
+                addStationPicture(realm, StationId,getDate(currentTime),String.valueOf(pictureUri) , title.getText().toString());
                 // send  event  to StationPictureActivity in the purpose to refresh the  pictures list
                 EventBus.getDefault().postSticky(new PictureValidationEvent(true));
                 Log.e("realmobject", realm.where(StationPicture.class).findAll().toString());
@@ -174,7 +179,7 @@ public class Utils {
         return bitmap;
     }
 
-
+    // save  picture in realm data base
     public static void addStationPicture(Realm realm, int id, String date, String picture, String title) {
         realm.beginTransaction();
         StationPicture stationPicure = realm.createObject(StationPicture.class);
@@ -185,5 +190,11 @@ public class Utils {
         realm.commitTransaction();
     }
 
-
+    // get date in "dd/MM/yyyy" format
+   public  static  String  getDate(Date date) {
+       // Display a date in day, month, year format
+       DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+       String today = formatter.format(date);
+       return today;
+   }
 }

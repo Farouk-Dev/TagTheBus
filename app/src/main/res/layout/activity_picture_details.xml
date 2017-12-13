@@ -5,38 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_below="@+id/header_layout"
-        android:background="@color/blue_03a9f4"
-        android:orientation="vertical"
-        android:padding="10dp">
 
-        <TextView
-            android:id="@+id/twitter"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/twitter"
-            android:textColor="@color/white_FFFFFF"
-            android:layout_marginBottom="10dp"/>
-
-        <TextView
-            android:id="@+id/facebook"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/facebook"
-            android:textColor="@color/white_FFFFFF"
-            android:layout_marginBottom="10dp"/>
-
-        <TextView
-            android:id="@+id/mail"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/white_FFFFFF"
-            android:text="@string/mail" />
-    </LinearLayout>
 
     <RelativeLayout
         android:id="@+id/header_layout"
@@ -80,7 +49,8 @@
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
             android:layout_marginEnd="20dp"
-            android:background="@android:drawable/ic_menu_share" />
+            android:background="@android:drawable/ic_menu_share"
+            android:visibility="gone"/>
     </RelativeLayout>
 
     <com.facebook.drawee.view.SimpleDraweeView
@@ -90,5 +60,43 @@
         android:layout_below="@+id/header_layout"
         app:placeholderImage="@mipmap/ic_launcher"
         tools:ignore="ContentDescription" />
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/header_layout"
+        android:background="@color/blue_03a9f4"
+        android:orientation="vertical"
+        android:padding="10dp"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/twitter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/twitter"
+            android:textColor="@color/white_FFFFFF"
+            android:layout_marginBottom="10dp"
+            android:visibility="gone"/>
+
+        <TextView
+            android:id="@+id/facebook"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/facebook"
+            android:textColor="@color/white_FFFFFF"
+            android:layout_marginBottom="10dp"
+            android:visibility="gone"/>
+
+        <TextView
+            android:id="@+id/mail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/mail"
+            android:textColor="@color/white_FFFFFF" />
+    </LinearLayout>
+
 
 </RelativeLayout>

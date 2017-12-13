@@ -2,8 +2,9 @@ package com.example.faroukjabberi.tagthebus.activities;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.ImageView;
+import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.faroukjabberi.tagthebus.R;
 import com.example.faroukjabberi.tagthebus.models.Station;
@@ -21,13 +22,22 @@ public class PictureDetailsActivity extends AppCompatActivity {
     TextView stationName;
     @BindView(R.id.picture)
     SimpleDraweeView picture;
-    @OnClick({R.id.back_image,R.id.back_text})
-    void goBack() {
-        // go back
-        Utils.navigate(this,StationPicturesActivity.class,station,stationPicture);
+
+
+    @OnClick({R.id.back_image, R.id.back_text})
+    void goBack(View view) {
+        switch (view.getId()) {
+            case R.id.back_image:
+                // go back
+                Utils.navigate(this, StationPicturesActivity.class, station, stationPicture);
+                break;
+            case R.id.back_text:
+                // go back
+                Utils.navigate(this, StationPicturesActivity.class, station, stationPicture);
+                break;
+
+        }
     }
-
-
 
 
     private Station station;
